@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/33601392/README.md)
+[README.md](https://github.com/user-attachments/files/33601624/README.md)
 <div align="center">
 
 **Language:** [English](README.md) · [فارسی](README.fa.md)
@@ -17,8 +17,7 @@
 **One VPS, many exit countries.** Multi-location Tor exit-node manager with first-class
 **3X-UI (Sanaei) · Pasargad · Marzban** integration and a built-in **Telegram health bot**.
 
-[![CI](https://img.shields.io/github/actions/workflow/status/SiNaKeEn/NexusNet-Node/ci.yml?branch=Multi&style=for-the-badge&label=CI)](https://github.com/SiNaKeEn/NexusNet-Node/actions)
-[![Version](https://img.shields.io/badge/version-3.0.0-blue?style=for-the-badge)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-3.0.0-blue?style=for-the-badge)](#)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/Ubuntu%20%7C%20Debian-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](#requirements)
 [![Telegram](https://img.shields.io/badge/Telegram-NexusNet-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](#)
@@ -135,7 +134,27 @@ Connect a bot exactly like the bots of Sanaei / Pasargad panels: **token + admin
 | `/settings` · `/mute 60` · `/unmute` · `/interval 120` | alert control |
 
 Buttons are available on every message. Messages are in **فارسی** or **English** (chosen at setup).
-See [docs/TELEGRAM_BOT.md](docs/TELEGRAM_BOT.md) for configuration details.
+
+<details><summary><b>Advanced settings</b> (<code>/etc/nexusnet/config.json</code>)</summary>
+
+```json
+{
+  "bot": {"token": "...", "admin_ids": [123456789], "lang": "fa", "proxy": ""},
+  "monitor": {
+    "interval_sec": 120, "fail_threshold": 2, "timeout_sec": 10, "workers": 8,
+    "good_ms": 800, "slow_ms": 2500, "alert_on_slow": false,
+    "auto_heal": true, "heal_max_per_hour": 3, "reminder_min": 60,
+    "geo_check": false, "geo_interval_min": 60, "daily_report_hour": -1
+  }
+}
+```
+Most values can be changed from the menu (17 → 5) or the bot (`/settings`, `/interval`, `/mute`).
+After editing by hand: `nxt-node bot restart`. If api.telegram.org is blocked on your server, set `bot.proxy`
+(e.g. `socks5h://127.0.0.1:9081`, through one of your own nodes).
+
+**Node status:** 🟢 UP (≤ `slow_ms`) · 🟡 SLOW · 🟠 ERROR (unit and port fine, but nothing comes back through Tor / wrong exit country) · 🔴 DOWN (unit inactive or port closed).
+Alerts fire only after `fail_threshold` consecutive bad probes.
+</details>
 
 ---
 
@@ -149,7 +168,11 @@ See [docs/TELEGRAM_BOT.md](docs/TELEGRAM_BOT.md) for configuration details.
 |---|---|---|
 | **3X-UI / Sanaei** | panel API + local DB | |
 | **Pasargad** | panel API | credentials asked once, stored `0600` |
-| **Marzban** | panel API | **one Xray restart for any number of nodes**; tags are `NexusNet-XX`; see [docs/MARZBAN.md](docs/MARZBAN.md) |
+| **Marzban** | panel API | **one Xray restart for any number of nodes**; tags are `NexusNet-XX` |
+
+**Marzban notes:** use a *sudo* admin; Xray must reach `127.0.0.1:<node port>` (the official docker-compose uses
+`network_mode: host`, which works); create at least one host on the inbound you want to clone first; users with an
+explicit inbound list must be allowed the new `NexusNet-XX` inbounds. Credentials are saved in `/etc/nexusnet/panels.json` (`0600`).
 
 Safety rules (all panels): foreign inbounds are **never** deleted or modified — if the preferred port is
 taken, the node is skipped (3X-UI/Pasargad) or moved to the next free port (Marzban); deletion matches **exact tags only**.
@@ -163,30 +186,8 @@ taken, the node is skipped (3X-UI/Pasargad) or moved to the next free port (Marz
 * The bot token and panel passwords live in `/etc/nexusnet/` (`0700`, files `0600`).
 * The bot answers **only** the configured admin IDs; everyone else gets a single "access denied".
 
-Details and reporting: [SECURITY.md](SECURITY.md).
 
 ---
-
-## Project layout
-
-```
-nexusnet/
-  engine.py        Tor instance lifecycle (create/delete/restart/backup)
-  countries.py     single source of truth for the 51 locations and ports
-  panel_tools.py   3X-UI + Pasargad wiring
-  marzban.py       Marzban wiring
-  creds.py         panel credential store
-  monitor/         health probes, watcher (alerts/auto-heal), Telegram bot, terminal menus
-tests/             unit + integration tests (no root / Tor needed)
-```
-
-```bash
-python3 -m unittest discover -s tests -v
-```
-
-## Contributing
-
-PRs welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Adding a country is one line in `countries.py`.
 
 ## Credits
 
