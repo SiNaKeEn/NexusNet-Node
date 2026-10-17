@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/33604854/README.md)
+[README.md](https://github.com/user-attachments/files/33605599/README.md)
 <div align="center">
 
 # NexusNet Node
@@ -6,7 +6,7 @@
 **One VPS · many exit countries.**  
 Multi-location Tor exit-node manager with first-class panel integration and a Telegram health bot.
 
-![version](https://img.shields.io/badge/version-3.3.0-22d3ee?style=for-the-badge&labelColor=0b1220)
+![version](https://img.shields.io/badge/version-3.5.0-22d3ee?style=for-the-badge&labelColor=0b1220)
 ![python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&labelColor=0b1220)
 ![os](https://img.shields.io/badge/Ubuntu%20%C2%B7%20Debian-E95420?style=for-the-badge&labelColor=0b1220)
 ![panels](https://img.shields.io/badge/3x--ui%20%C2%B7%20Pasargad%20%C2%B7%20Marzban-supported-2563eb?style=for-the-badge&labelColor=0b1220)
@@ -78,7 +78,7 @@ Ping and path quality still depend on the end-user’s network, not only the VPS
 ```
 ┌────────────────────────────────────────────────────────┐
 │  N E X U S N E T  -  Multi Node                        │
-│  v3.3.0  ·  Tor exit nodes for your panels             │
+│  v3.5.0  ·  Tor exit nodes for your panels             │
 ├────────────────────────────────────────────────────────┤
 │  [ 1] Install Engine          [ 9] Check Node Latency  │
 │  [ 2] Update System           [10] Restart All Nodes   │
