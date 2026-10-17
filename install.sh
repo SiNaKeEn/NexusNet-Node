@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # NexusNet Node installer / updater
-#   bash <(curl -fsSL https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/main/install.sh)
+#   bash <(curl -fsSL https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/Multi/install.sh)
 # Env: NXT_REF=<branch|tag>  NXT_LOCAL_SRC=<dir> (install from a local checkout)  NXT_NO_LAUNCH=1
 set -euo pipefail
 
 REPO="${NXT_REPO:-SiNaKeEn/NexusNet-Node}"
-REF="${NXT_REF:-main}"
+REF="${NXT_REF:-Multi}"
 PREFIX="/opt/nexusnet"
 R=$'\e[1;31m'; G=$'\e[1;32m'; Y=$'\e[1;33m'; C=$'\e[1;36m'; N=$'\e[0m'
 
