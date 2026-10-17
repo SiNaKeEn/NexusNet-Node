@@ -1,4 +1,4 @@
-[README.fa.md](https://github.com/user-attachments/files/33602447/README.fa.md)
+[README.fa.md](https://github.com/user-attachments/files/33604857/README.fa.md)
 <div align="center">
 
 # NexusNet Node
@@ -6,7 +6,7 @@
 **یک سرور · چند کشور خروجی.**  
 مدیریت چندنود Tor Exit با اتصال مستقیم به پنل‌ها و بات مانیتور تلگرام.
 
-![version](https://img.shields.io/badge/version-3.1.0-22d3ee?style=for-the-badge&labelColor=0b1220)
+![version](https://img.shields.io/badge/version-3.3.0-22d3ee?style=for-the-badge&labelColor=0b1220)
 ![python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&labelColor=0b1220)
 ![os](https://img.shields.io/badge/Ubuntu%20%C2%B7%20Debian-E95420?style=for-the-badge&labelColor=0b1220)
 ![panels](https://img.shields.io/badge/3x--ui%20%C2%B7%20Pasargad%20%C2%B7%20Marzban-supported-2563eb?style=for-the-badge&labelColor=0b1220)
@@ -78,7 +78,7 @@ curl -sL "https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/Multi/install
 ```
 ┌────────────────────────────────────────────────────────┐
 │  N E X U S N E T  -  Multi Node                        │
-│  v3.1.0  ·  Tor exit nodes for your panels             │
+│  v3.3.0  ·  Tor exit nodes for your panels             │
 ├────────────────────────────────────────────────────────┤
 │  [ 1] نصب موتور               [ 9] بررسی تأخیر نودها   │
 │  [ 2] آپدیت سیستم             [10] ریستارت همه نودها   │
