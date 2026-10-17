@@ -1,4 +1,4 @@
-[README.fa.md](https://github.com/user-attachments/files/33600992/README.fa.md)
+[Uploading README.fa.md…]()
 <div align="center" dir="rtl">
 
 **زبان:** [English](README.md) · [فارسی](README.fa.md)
@@ -37,7 +37,7 @@ NexusNet یک VPS را به مجموعه‌ای از نودهای Tor تبدیل
 </div>
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/Multi/install.sh)
 ```
 
 <div dir="rtl">
@@ -90,7 +90,7 @@ Ubuntu 20.04+ یا Debian 11+ · حداقل ۲ هسته و ۴ گیگ رم · د�
 | `/system` · `/ip` | آپتایم، لود، رم، دیسک · آی‌پی سرور |
 | `/settings` · `/mute 60` · `/unmute` · `/interval 120` | کنترل هشدارها |
 
-زبان پیام‌ها هنگام راه‌اندازی انتخاب می‌شود (فارسی یا English). جزئیات: [docs/TELEGRAM_BOT.md](docs/TELEGRAM_BOT.md)
+زبان پیام‌ها هنگام راه‌اندازی انتخاب می‌شود (فارسی یا English).
 
 ---
 
@@ -104,7 +104,10 @@ Ubuntu 20.04+ یا Debian 11+ · حداقل ۲ هسته و ۴ گیگ رم · د�
 |---|---|---|
 | ثنایی (3X-UI) | API پنل + دیتابیس محلی | |
 | پاسارگارد | API پنل | یوزر/پسورد یک بار پرسیده و با دسترسی `0600` ذخیره می‌شود |
-| مرزبان | API پنل | **برای هر تعداد نود فقط یک ریستارت Xray**؛ تگ‌ها `NexusNet-XX`؛ [docs/MARZBAN.md](docs/MARZBAN.md) |
+| مرزبان | API پنل | **برای هر تعداد نود فقط یک ریستارت Xray**؛ تگ‌ها `NexusNet-XX` |
+
+**نکات مرزبان:** با ادمین *sudo* وارد شوید؛ Xray باید به `127.0.0.1:<پورت نود>` دسترسی داشته باشد (docker-compose رسمی با `network_mode: host` کار می‌کند)؛
+قبلش حداقل یک هاست روی اینباندی که می‌خواهید کلون شود بسازید؛ کاربرانی که لیست اینباند مشخص دارند باید اینباندهای `NexusNet-XX` را هم داشته باشند.
 
 قاعده‌ی ایمنی: اینباندهای شخصی شما **هرگز** حذف یا تغییر نمی‌کنند؛ اگر پورت اشغال باشد آن نود رد می‌شود
 (ثنایی/پاسارگارد) یا به پورت آزاد بعدی می‌رود (مرزبان). حذف فقط با تطبیق دقیق تگ انجام می‌شود.
@@ -118,11 +121,8 @@ Ubuntu 20.04+ یا Debian 11+ · حداقل ۲ هسته و ۴ گیگ رم · د�
 * توکن بات و پسورد پنل‌ها در `/etc/nexusnet/` (دسترسی `0700`/`0600`) ذخیره می‌شود.
 * بات فقط به آیدی‌های ادمین جواب می‌دهد.
 
-## تست
-`python3 -m unittest discover -s tests -v` (بدون نیاز به root یا Tor)
-
 ## کردیت
-بر پایه‌ی ایده‌ی T.Sin · توسعه: **SiNa (KeEn)** · کانال تلگرام: **NexusNet**
+بر پایه‌ی ایده‌ی T.Sin · توسعه: **KeEn** · کانال تلگرام: **NexusNet**
 
 ## لایسنس
 [MIT](LICENSE)
