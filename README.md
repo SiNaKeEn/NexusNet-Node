@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/33600921/README.md)
+[README.md](https://github.com/user-attachments/files/33601392/README.md)
 <div align="center">
 
 **Language:** [English](README.md) · [فارسی](README.fa.md)
@@ -17,7 +17,7 @@
 **One VPS, many exit countries.** Multi-location Tor exit-node manager with first-class
 **3X-UI (Sanaei) · Pasargad · Marzban** integration and a built-in **Telegram health bot**.
 
-[![CI](https://img.shields.io/github/actions/workflow/status/SiNaKeEn/NexusNet-Node/ci.yml?branch=main&style=for-the-badge&label=CI)](https://github.com/SiNaKeEn/NexusNet-Node/actions)
+[![CI](https://img.shields.io/github/actions/workflow/status/SiNaKeEn/NexusNet-Node/ci.yml?branch=Multi&style=for-the-badge&label=CI)](https://github.com/SiNaKeEn/NexusNet-Node/actions)
 [![Version](https://img.shields.io/badge/version-3.0.0-blue?style=for-the-badge)](CHANGELOG.md)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/Ubuntu%20%7C%20Debian-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](#requirements)
@@ -48,7 +48,7 @@ so your users can pick "🇩🇪 Germany", "🇹🇷 Turkey", "🇳🇱 Netherla
 ## Quick start
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/Multi/install.sh)
 ```
 
 then, any time:
@@ -190,7 +190,7 @@ PRs welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Adding a country is one 
 
 ## Credits
 
-Based on the T.Sin idea · Developed by **SiNa (KeEn)** · Community: **NexusNet** on Telegram.
+Based on the T.Sin idea · Developed by **KeEn** · Community: **NexusNet** on Telegram.
 
 ## License
 
