@@ -1,151 +1,197 @@
+[README.md](https://github.com/user-attachments/files/33600921/README.md)
 <div align="center">
+
+**Language:** [English](README.md) · [فارسی](README.fa.md)
+
+```
+███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗███╗   ██╗███████╗████████╗
+████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝████╗  ██║██╔════╝╚══██╔══╝
+██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗██╔██╗ ██║█████╗     ██║
+██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║██║╚██╗██║██╔══╝     ██║
+██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║██║ ╚████║███████╗   ██║
+╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝   ╚═╝
+```
 
 # NexusNet Node
 
-**Multi-country Tor Exit node manager** — one VPS, many exit locations.
+**One VPS, many exit countries.** Multi-location Tor exit-node manager with first-class
+**3X-UI (Sanaei) · Pasargad · Marzban** integration and a built-in **Telegram health bot**.
 
-[![Version](https://img.shields.io/badge/version-v2.1-blue?style=for-the-badge)](https://github.com)
+[![CI](https://img.shields.io/github/actions/workflow/status/SiNaKeEn/NexusNet-Node/ci.yml?branch=main&style=for-the-badge&label=CI)](https://github.com/SiNaKeEn/NexusNet-Node/actions)
+[![Version](https://img.shields.io/badge/version-3.0.0-blue?style=for-the-badge)](CHANGELOG.md)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-Personal-orange?style=for-the-badge)](#)
-[![Platform](https://img.shields.io/badge/Platform-Ubuntu%20%7C%20Debian-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](#)
-
-<br>
-
-**Language:** Python 3  
-**Panels:** 3X-UI · Pasargad · Marzban (limited)
+[![Platform](https://img.shields.io/badge/Ubuntu%20%7C%20Debian-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](#requirements)
+[![Telegram](https://img.shields.io/badge/Telegram-NexusNet-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](#)
 
 </div>
 
 ---
 
-## What is NexusNet?
+## Why NexusNet?
 
-NexusNet turns a **single VPS** into a fleet of **Tor Exit nodes**, each pinned to a different country.  
-It wires those nodes into your existing panel (3X-UI / Pasargad) with one command — inbounds, SOCKS outbounds, routing rules, and hosts included.
+NexusNet turns a **single VPS** into a fleet of Tor instances, each **pinned to a different exit country**
+(51 locations), then wires them into your proxy panel — inbound, SOCKS outbound, routing rule and host —
+so your users can pick "🇩🇪 Germany", "🇹🇷 Turkey", "🇳🇱 Netherlands"… from one subscription.
 
-| Feature | Description |
-|--------|-------------|
-| 🌍 **50+ countries** | Germany, Turkey, US, France, NL, FI, CH, … |
-| 🔌 **Panel Tools** | Auto-clone inbounds & hosts into 3X-UI / Pasargad |
-| 🔄 **NEWNYM** | Fresh circuit / exit IP on every restart |
-| 💾 **Backup & restore** | Node list + ports in one file |
-| 🧹 **Clean delete** | Removes local services **and** panel configs |
+| | |
+|---|---|
+| 🌍 **51 locations** | fixed, predictable SOCKS ports per country |
+| 🔌 **3 panels** | 3X-UI (Sanaei) · Pasargad · **Marzban** (new, fully automated) |
+| 🤖 **Telegram health bot** | ping every node, instant alerts when one dies, one-tap restart |
+| 🛠 **Auto-heal** | a node that stays down is restarted automatically (rate limited) |
+| 🔄 **NEWNYM on restart** | fresh circuit / exit IP |
+| 🧹 **Clean delete** | removes the service **and** the panel config (exact-tag matching only) |
+| 💾 **Backup / restore** | node list + ports in one file |
 
 ---
 
-## Requirements
+## Quick start
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/main/install.sh)
+```
+
+then, any time:
+
+```bash
+sudo nxt-node
+```
+
+> `nexusnet` and `panel-tools` still work as aliases, so upgrading from v2.x changes nothing for you.
+> Existing nodes are **not** touched by the upgrade.
+
+### Requirements
 
 | Item | Recommendation |
 |------|----------------|
-| **Location** | Preferably **Germany 🇩🇪** |
-| **CPU** | 2+ cores |
-| **RAM** | 4 GB+ |
-| **OS** | Ubuntu / Debian |
-| **Access** | Root (`sudo`) |
+| OS | Ubuntu 20.04+ / Debian 11+ (apt) |
+| CPU / RAM | 2+ cores / 4 GB+ (each node is one Tor process) |
+| Python | 3.8+ (installed automatically) |
+| Access | root |
+| Panel | 3X-UI, Pasargad or Marzban on **the same server** |
 
-> **About latency:** Final ping depends on the user's path through Tor. Better path affinity → lower delay.  
-> **About exit IPs:** Countries with few exit relays (e.g. AE) may show a stable IP. From v1.13+, every restart sends `NEWNYM` so Tor can pick another exit when available.
+> **Latency:** the ping you see is a full request through a Tor circuit (typically 0.3 – 2 s), not an ICMP ping.
+> **Exit IPs:** countries with few exit relays may show a stable IP.
 
 ---
 
-## Install
+## Menu
+
+```
+ [1]  Install Engine           [9]  Check Node Latency
+ [2]  Update System            [10] Restart All Nodes
+ [3]  Uninstall System         [11] Show Active Ports
+ [4]  Add Location Node        [12] Quick Country Test
+ [5]  Bulk Add Nodes           [13] Delete All Nodes
+ [6]  View Active Nodes        [14] System Status
+ [7]  Edit or Delete Nodes     [15] Backup / Restore
+ [8]  Advanced Port Settings   [16] Panel Tools (3X-UI / Pasargad / Marzban)
+ [17] Health Monitor & Telegram Bot      [18] Health Check Now
+```
+
+### Command line
 
 ```bash
-curl -sL "https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/Multi/install.sh" \
-  -o /tmp/install.sh && sudo bash /tmp/install.sh
+nxt-node                 # interactive menu
+nxt-node health          # probe every node once (exit code 1 if any is down)
+nxt-node health de --geo # one node, also verify the exit country
+nxt-node health --json   # machine readable
+nxt-node bot setup       # connect the Telegram bot
+nxt-node bot status|start|stop|restart|logs|test
+nxt-node panels          # Panel Tools
+nxt-node update
 ```
 
-> **Tip:** If you hit `Argument list too long`, use the two-step command above.  
-> Do **not** run `bash -c "$(curl ...)"` on this installer.
+---
 
-After install:
+## 🤖 Telegram bot & health monitor
+
+Connect a bot exactly like the bots of Sanaei / Pasargad panels: **token + admin ID, done.**
+
+1. Create a bot with [@BotFather](https://t.me/BotFather) and copy the token.
+2. Open your bot and press **Start**. Get your numeric ID from [@userinfobot](https://t.me/userinfobot).
+3. `nxt-node` → **17** → **1** and paste both. A test message is sent and the service is enabled.
+
+**What it does**
+
+* Probes every node every 2 min (configurable): systemd unit → SOCKS port → Tor bootstrap/circuit →
+  real HTTP request through the node (the *ping*) → optional exit-country check.
+* Sends **grouped** alerts (one message, not 40) after N consecutive failures, and a **recovery** message with the downtime.
+* Tells you when the **VPS itself** has no internet (so you don't chase 51 "dead" nodes).
+* **Auto-heal:** restarts a node that stays down (max 3/hour/node by default).
+* Reminders for nodes that stay down, optional slow-node alerts, optional daily report.
+
+**Bot commands** (admins only)
+
+| Command | |
+|---|---|
+| `/status` | all nodes with ping |
+| `/down` | only problem nodes + reason |
+| `/ping [cc]` | live check of all nodes or one |
+| `/node de` | details: service, port, bootstrap %, exit IP, error |
+| `/restart [cc]` · `/restart_all` | restart (with confirmation for "all") |
+| `/newnym cc\|all` | request a new Tor circuit |
+| `/system` · `/ip` | uptime, load, RAM, disk · public IP |
+| `/settings` · `/mute 60` · `/unmute` · `/interval 120` | alert control |
+
+Buttons are available on every message. Messages are in **فارسی** or **English** (chosen at setup).
+See [docs/TELEGRAM_BOT.md](docs/TELEGRAM_BOT.md) for configuration details.
+
+---
+
+## Panels
+
+`nxt-node` → **16** (or `nxt-node panels`). For each node it creates, in the panel:
+
+`inbound (cloned from one you choose, new port)` → `SOCKS outbound 127.0.0.1:<node port>` → `routing rule` → `host`
+
+| Panel | Method | Notes |
+|---|---|---|
+| **3X-UI / Sanaei** | panel API + local DB | |
+| **Pasargad** | panel API | credentials asked once, stored `0600` |
+| **Marzban** | panel API | **one Xray restart for any number of nodes**; tags are `NexusNet-XX`; see [docs/MARZBAN.md](docs/MARZBAN.md) |
+
+Safety rules (all panels): foreign inbounds are **never** deleted or modified — if the preferred port is
+taken, the node is skipped (3X-UI/Pasargad) or moved to the next free port (Marzban); deletion matches **exact tags only**.
+
+---
+
+## Security
+
+* Tor SOCKS ports now bind to **127.0.0.1** by default (panels run on the same server).
+  Need a remote panel? `NXT_SOCKS_BIND=0.0.0.0 nxt-node` before creating nodes **and firewall the ports**.
+* The bot token and panel passwords live in `/etc/nexusnet/` (`0700`, files `0600`).
+* The bot answers **only** the configured admin IDs; everyone else gets a single "access denied".
+
+Details and reporting: [SECURITY.md](SECURITY.md).
+
+---
+
+## Project layout
+
+```
+nexusnet/
+  engine.py        Tor instance lifecycle (create/delete/restart/backup)
+  countries.py     single source of truth for the 51 locations and ports
+  panel_tools.py   3X-UI + Pasargad wiring
+  marzban.py       Marzban wiring
+  creds.py         panel credential store
+  monitor/         health probes, watcher (alerts/auto-heal), Telegram bot, terminal menus
+tests/             unit + integration tests (no root / Tor needed)
+```
 
 ```bash
-nexusnet
+python3 -m unittest discover -s tests -v
 ```
 
----
+## Contributing
 
-## Menu overview
+PRs welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Adding a country is one line in `countries.py`.
 
-### Main (`nexusnet`)
+## Credits
 
-| # | Action |
-|---|--------|
-| 1 | Install engine (dependencies) |
-| 2 | Update system |
-| 3 | Full uninstall |
-| 4 | Add one location |
-| 5 | Bulk deploy nodes |
-| 6 | List active nodes |
-| 7 | Edit / delete node (+ panel cleanup) |
-| 8 | Port settings |
-| 9 | Latency check |
-| 10 | Restart all nodes (+ NEWNYM) |
-| 11 | Active ports |
-| 12 | Quick country test |
-| 13 | Delete all nodes |
-| 14 | System status |
-| 15 | Backup / restore |
-| 16 | **Panel Tools** (3X-UI / Pasargad) |
+Based on the T.Sin idea · Developed by **SiNa (KeEn)** · Community: **NexusNet** on Telegram.
 
-### Panel Tools
+## License
 
-```
-── Create ──
-  [1] Add installed NexusNet nodes     ← primary workflow
-  [2] Create all countries
-  [3] Create selected countries
-
-── Manage ──
-  [4] Delete configurations
-  [0] Exit
-```
-
-**Host address modes** (when cloning hosts in Pasargad):
-
-1. Keep source domain/address *(recommended)*  
-2. Server public IP  
-3. Custom address  
-
-> **Important:** Host address is what **clients connect to** (your domain or VPS IP).  
-
----
-
-## Tech stack
-
-| Layer | Stack |
-|-------|--------|
-| Core | **Python 3** |
-| Networking | Tor, SOCKS5, Xray |
-| Panels | 3X-UI (SQLite + API), Pasargad (REST), Marzban (manual SOCKS) |
-| Installer | Bash + embedded Base64 payloads |
-
----
-
-## Backup & restore
-
-- **Backup:** `/root/nexusnet_backup.txt` (nodes + ports)  
-- **Restore:** Recreates missing nodes from that file  
-
-Deleting a node from option **7** also tries to remove matching inbounds / outbounds / routing / hosts from **3X-UI** and **Pasargad**.
-
----
-
-## Support
-
-| Channel | Link |
-|---------|------|
-| Telegram channel | [@NexusNet_Plus](https://t.me/NexusNet_Plus) |
-| Telegram bot | [@NexusNet_PlusBot](https://t.me/NexusNet_PlusBot) |
-| Support | [@NexusNet_Sup](https://t.me/NexusNet_Sup) |
-
----
-
-<div align="center">
-
-**Based on the T.Sin idea** · Developed by **SiNa (KeEn)**
-
-`nexusnet` · v2.1 · Personal Edition
-
-</div>
+[MIT](LICENSE).
