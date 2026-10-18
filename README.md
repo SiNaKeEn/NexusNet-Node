@@ -1,16 +1,17 @@
-[README.md](https://github.com/user-attachments/files/33605599/README.md)
+[README.md](https://github.com/user-attachments/files/33632791/README.md)
 <div align="center">
 
 # NexusNet Node
 
-**One VPS · many exit countries.**  
-Multi-location Tor exit-node manager with first-class panel integration and a Telegram health bot.
+**One VPS · many exit countries.**
+Multi-location Tor exit-node manager for **3X-UI (Sanaei) · Pasargad · Marzban** — with a Telegram control bot.
 
-![version](https://img.shields.io/badge/version-3.5.0-22d3ee?style=for-the-badge&labelColor=0b1220)
+![version](https://img.shields.io/badge/version-4.1.0-22d3ee?style=for-the-badge&labelColor=0b1220)
 ![python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&labelColor=0b1220)
 ![os](https://img.shields.io/badge/Ubuntu%20%C2%B7%20Debian-E95420?style=for-the-badge&labelColor=0b1220)
 ![panels](https://img.shields.io/badge/3x--ui%20%C2%B7%20Pasargad%20%C2%B7%20Marzban-supported-2563eb?style=for-the-badge&labelColor=0b1220)
-![bot](https://img.shields.io/badge/Telegram-health%20bot-26A5E4?style=for-the-badge&labelColor=0b1220)
+![bot](https://img.shields.io/badge/Telegram-control%20bot-26A5E4?style=for-the-badge&labelColor=0b1220)
+![license](https://img.shields.io/badge/license-MIT-16a34a?style=for-the-badge&labelColor=0b1220)
 
 **English** · [فارسی](README.fa.md)
 
@@ -18,249 +19,260 @@ Multi-location Tor exit-node manager with first-class panel integration and a Te
 
 ---
 
-## ✨ Highlights
+## ✨ What is it?
+
+NexusNet turns **one VPS** into a fleet of Tor instances, each **pinned to a different exit country** (51 locations),
+then wires them into your proxy panel — inbound → SOCKS outbound → routing rule → host — so your users can pick
+🇩🇪 Germany, 🇹🇷 Turkey, 🇳🇱 Netherlands… from a single subscription.
 
 | | |
 |---|---|
-| 🌍 **51 exit locations** | Germany, Netherlands, Turkey, US, UK… each on its own SOCKS port, pinned with `ExitNodes {cc}` |
-| 🔌 **Three panels** | **3X-UI (Sanaei)** · **Pasargad** · **Marzban** — inbound, SOCKS outbound, routing and host in one pass |
-| 🤖 **Telegram health bot** | Probes every node, grouped alerts when something dies, one-tap restart from the chat |
-| 🛠 **Auto-heal** | A node that stays down is restarted automatically (rate-limited per hour) |
-| 🔄 **NEWNYM on restart** | Fresh Tor circuit / exit IP every time you restart |
-| 🧹 **Clean delete** | Removes the local service **and** the matching panel config (exact tag only — your other inbounds stay safe) |
-| 💾 **Backup / restore** | Node list + ports in one file; restore rebuilds what’s missing |
-| 📍 **Smart host address** | Keep source domain, use server public IP, or type a custom one when cloning hosts |
+| 🌍 **51 locations** | fixed, predictable SOCKS port per country |
+| 🔌 **3 panels** | 3X-UI (Sanaei) · Pasargad · **Marzban** — one Xray restart however many nodes you add |
+| 🤖 **Telegram control bot** | dashboard, live ping, alerts with **one-tap restart**, add / delete nodes, wire to panels — all from your phone |
+| 📦 **Backup & VPS migration** | one file → new server: engine, nodes with the **same ports**, settings and panel wiring restored in order; daily backup straight to your Telegram |
+| ☑️ **Bulk from your phone** | select 10 countries at once, create them and wire them into the panel in one batch — same for delete / restart |
+| 🛠 **Auto-heal** | a node that stays down is restarted automatically (rate-limited) |
+| 🩺 **Doctor** | `nxt-node doctor` finds the usual causes: wrong clock, missing GeoIP, port clashes, exposed proxies, blocked Telegram |
+| 🧹 **Safe delete** | removes the service **and** its panel config — exact tags only, your own inbounds are never touched |
+| 💾 **Backup / restore** | node list + ports in one file |
 
 ---
 
 ## 🚀 Install
 
-> Requirements: Linux (**root**), Ubuntu / Debian, and ideally your panel on the **same** server.
+> Linux, **root**, Ubuntu / Debian. Your panel should be on the **same** server.
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/Multi/install.sh)
 ```
 
-That installs `nxt-node` and opens the menu. Next time:
+The installer is a single self-contained file. Next time just run:
 
 ```bash
 sudo nxt-node
 ```
 
-Aliases from older versions still work: `nexusnet`, `NexusNet`, `panel-tools`.
-
-<details>
-<summary><b>If you hit <code>Argument list too long</code></b></summary>
-
-```bash
-curl -sL "https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/Multi/install.sh" -o /tmp/install.sh && sudo bash /tmp/install.sh
-```
-</details>
+`nexusnet`, `NexusNet` and `panel-tools` still work. Upgrading from an older version keeps your nodes untouched.
 
 <details>
 <summary><b>Requirements</b></summary>
 
-| Item | Recommendation |
-|------|----------------|
+| | |
+|---|---|
 | OS | Ubuntu 20.04+ / Debian 11+ |
-| CPU / RAM | 2+ cores · 4 GB+ |
-| Server location | **Germany** or **Netherlands** work best for Tor exits |
+| CPU / RAM | 2+ cores · 4 GB+ (each node is one Tor process, roughly 60 MB) |
+| Python | 3.8+ (installed automatically) |
 | Panel | 3X-UI, Pasargad or Marzban on the same machine |
-| Access | Root (`sudo`) |
 
-Ping and path quality still depend on the end-user’s network, not only the VPS.
+The ping you see is a full request **through a Tor circuit** (typically 0.3 – 2 s), not an ICMP ping.
 </details>
 
 ---
 
-## 🖥 Menu
+## 🖥 Terminal menu
 
 ```
-┌────────────────────────────────────────────────────────┐
-│  N E X U S N E T  -  Multi Node                        │
-│  v3.5.0  ·  Tor exit nodes for your panels             │
-├────────────────────────────────────────────────────────┤
-│  [ 1] Install Engine          [ 9] Check Node Latency  │
-│  [ 2] Update System           [10] Restart All Nodes   │
-│  [ 3] Uninstall System        [11] Show Active Ports   │
-│  [ 4] Add Location Node       [12] Quick Country Test  │
-│  [ 5] Bulk Add Nodes          [13] Delete All Nodes    │
-│  [ 6] View Active Nodes       [14] System Status       │
-│  [ 7] Edit or Delete Nodes    [15] Backup / Restore    │
-│  [ 8] Advanced Port Settings  [16] Panel Tools         │
-│  [17] Health Monitor & Bot    [18] Health Check Now    │
-│  [ 0] Exit                                             │
-└────────────────────────────────────────────────────────┘
+ ┌────────────────────────────────────────────────────────┐
+ │             N E X U S N E T  -  Multi Node             │
+ │       v4.1.0  ·  Tor exit nodes for your panels        │
+ └────────────────────────────────────────────────────────┘
+ ┌────────────────────────────────────────────────────────┐
+ │  System    : Active (12 nodes)                         │
+ │  Bot       : active                                    │
+ │  Nodes     : 11 up, 1 problem  (45s ago)               │
+ ├─ SETUP ────────────────────────────────────────────────┤
+ │   [ 1] » Install Engine                                │
+ │   [ 2] » Update NexusNet                               │
+ │   [ 3] » Uninstall NexusNet                            │
+ ├─ NODES ────────────────────────────────────────────────┤
+ │   [ 4] » Add Node                                      │
+ │   [ 5] » Bulk Deploy                                   │
+ │   [ 6] » List Nodes                                    │
+ │   [ 7] » Edit / Delete Nodes                           │
+ │   [ 8] » Port Settings                                 │
+ ├─ MONITORING ───────────────────────────────────────────┤
+ │   [ 9] » Health Check  (ping all nodes)                │
+ │   [10] » Telegram Bot & Alerts                         │
+ │   [11] » Doctor  (find what is broken)                 │
+ │   [12] » Latency & Exit IP  (classic)                  │
+ ├─ TOOLS ────────────────────────────────────────────────┤
+ │   [13] » Restart All Nodes                             │
+ │   [14] » Restart One Node                              │
+ │   [15] » Node Logs                                     │
+ │   [16] » Active Ports                                  │
+ │   [17] » Quick Country Test                            │
+ │   [18] » System Status                                 │
+ │   [19] » Backup & Migrate  (move to a new VPS)         │
+ ├─ PANELS ───────────────────────────────────────────────┤
+ │   [20] » Panel Tools  (3X-UI / Pasargad / Marzban)     │
+ ├─ DANGER ZONE ──────────────────────────────────────────┤
+ │   [21] » Delete All Nodes                              │
+ ├────────────────────────────────────────────────────────┤
+ │   [ 0] » Exit                                          │
+ └────────────────────────────────────────────────────────┘
 ```
 
-### Command line
+### Command line (scriptable)
 
 ```bash
-nxt-node                 # interactive menu
-nxt-node health          # probe every node once (exit 1 if any is down)
-nxt-node health de --geo # one country + exit-country check
-nxt-node health --json   # machine-readable
-nxt-node bot setup       # connect the Telegram bot
-nxt-node bot status|start|stop|restart|logs|test
-nxt-node panels          # Panel Tools (3X-UI / Pasargad / Marzban)
-nxt-node update          # self-update
+nxt-node                      # interactive menu
+nxt-node list [--json]        # installed nodes + service state
+nxt-node add de nl tr         # create nodes   (or: nxt-node add --all)
+nxt-node delete tr -y         # delete a node and its panel config
+nxt-node restart all|de       # restart
+nxt-node newnym de|all        # fresh Tor circuit / exit IP
+nxt-node logs de -n 100       # a node's service log
+nxt-node backup [-o FILE] [--secrets] [--send]   # backup file (+ send to Telegram)
+nxt-node restore FILE [-y] [--no-wire]           # restore / migrate on THIS server
+nxt-node health [de] [--geo] [--json]   # probe through Tor (exit code 1 if any node is bad)
+nxt-node doctor               # diagnose problems
+nxt-node bot setup|start|stop|restart|status|logs|test
+nxt-node panels               # Panel Tools
+nxt-node update
 ```
 
 ---
 
-## 🤖 Telegram health bot
+## 🤖 Telegram bot
 
-<div align="center">
+Connect it exactly like the bots of Sanaei / Pasargad: **token + admin ID, done.**
 
-The bot watches every node on a schedule, alerts you when something fails, and can restart them from chat.
+1. Create a bot with [@BotFather](https://t.me/BotFather) → copy the **token**.
+2. Open your bot and press **Start**. Get your numeric ID from [@userinfobot](https://t.me/userinfobot).
+3. `nxt-node` → **10** → **1** → paste both (language: Farsi / English). A test message is sent and the service is enabled.
 
-</div>
+If Telegram is blocked on your server the setup asks for an optional proxy (used **only** for `api.telegram.org`).
 
-### Setup
+### What you get
 
-1. Talk to [@BotFather](https://t.me/BotFather) → create a bot → copy the **token**.
-2. Talk to [@userinfobot](https://t.me/userinfobot) → copy your **numeric user ID**.
-3. `nxt-node` → **17** → **1** and paste both. A test message is sent and the service is enabled.
+```
+🌐 NexusNet Node · v4.1.0
+━━━━━━━━━━━━━━━━━━━━
+🟢 11 online · 🟡 1 slow · 🔴 1 down
+⚡ Avg ping 640 ms · 🕒 checked 42s ago
+━━━━━━━━━━━━━━━━━━━━
+🖥 Load 0.42 · RAM 41% · Up 12d
 
-Or:
-
-```bash
-sudo nxt-node bot setup
+ [📊 Status] [🚨 Problems] [🏓 Ping all]
+ [🌍 Nodes]  [➕ Add node] [🧩 Panels]
+ [🖥 System] [⚙️ Settings] [❓ Help]
 ```
 
-### Commands (admins only)
+* **One message, always** – every button *edits* the same message; no chat spam. `/start` replaces the old menu.
+* **Alerts with buttons** – a down-alert carries `🔄 DE  🔄 TR …` buttons: restart the broken node straight from the alert.
+* **Nodes** – grid with live status icons → tap a node for details, 🏓 ping, 🔄 restart, 🔁 new circuit, 🔗 wire to panel, 🗑 delete (with confirmation).
+* **Select several** – `☑️ Select` on the Nodes screen (or ➕ Add): tick any number of countries/nodes (page, all, clear), then **Create / Restart / Wire to panel / Delete** them in one go. Panels get one batch (Marzban: a single Xray restart).
+* **Add nodes** – pick e.g. 10 countries → *Tor only* or *Tor + panel* (inbound → host → address wizard) with live progress.
+* **Backup** – 📤 send a backup file now, 📅 daily auto-backup to your chat, and **send a `.nxtbak` file to the bot to restore** (see below).
+* **Panels** – wire existing nodes into 3X-UI / Pasargad / Marzban. **Panel passwords are never typed into Telegram** — save the login once with `nxt-node panels`.
+* **Settings** – auto-heal, slow alerts, exit-country check, daily report, interval, alert threshold, mute 1h / 8h, language فارسی ⇄ English.
+* Grouped alerts (one message, not 40), recovery messages with downtime, “still down” reminders, and a hint when the **VPS itself** has no internet.
 
-| Command | What it does |
-|---------|----------------|
-| `/status` | Status + ping for every node |
-| `/down` | Only problem nodes + reason |
-| `/ping [cc]` | Live check, all or one country |
-| `/node de` | Detail: service, port, bootstrap %, exit IP, error |
-| `/restart [cc]` · `/restart_all` | Restart (asks confirm for “all”) |
-| `/newnym cc\|all` | New Tor circuit |
-| `/system` · `/ip` | Uptime, load, RAM, disk · public IP |
-| `/settings` · `/mute 60` · `/unmute` · `/interval 120` | Alert controls |
-
-Bot language (Persian / English) is chosen at setup.  
-Inline keyboard buttons work for status, problems, ping, system, restart and settings.
+Text shortcuts: `/start /status /down /ping [cc] /nodes /node cc /restart cc /newnym cc|all /add [cc] /panels /backup /system /settings /mute 60 /unmute /interval 120 /help`
 
 <details>
-<summary><b>What the monitor checks</b></summary>
+<summary><b>Advanced settings</b> — <code>/etc/nexusnet/config.json</code></summary>
 
-Every interval (default **120 s**, adjustable):
+```json
+{
+  "bot": {"token": "...", "admin_ids": [123456789], "lang": "fa", "proxy": ""},
+  "monitor": {
+    "interval_sec": 120, "fail_threshold": 2, "timeout_sec": 10, "workers": 8,
+    "good_ms": 800, "slow_ms": 2500, "alert_on_slow": false,
+    "auto_heal": true, "heal_max_per_hour": 3, "reminder_min": 60,
+    "geo_check": false, "geo_interval_min": 60, "daily_report_hour": -1
+  }
+}
+```
 
-1. systemd service state  
-2. SOCKS port listening  
-3. Tor bootstrap %  
-4. Real HTTP request **through** the node (= “ping”)  
-5. Optional exit-country match (`geo_check`)
-
-Then:
-
-- **Grouped** down / recovered alerts (one message, not forty)
-- Detects “the VPS itself has no internet” so you don’t chase 51 false failures
-- Auto-restart of stuck nodes (default max **3/hour** per node)
-- Optional slow-node alerts, still-down reminders, daily report
-
-Config lives in `/etc/nexusnet/config.json` (mode `0600`). After hand-edits: `nxt-node bot restart`.  
-If `api.telegram.org` is blocked on the server, set `bot.proxy` to an HTTP/SOCKS proxy.
+**Node status:** 🟢 UP · 🟡 SLOW (> `slow_ms`) · 🟠 ERROR (service and port fine, but nothing comes back through Tor, or wrong exit country) · 🔴 DOWN (unit inactive / port closed).
+Alerts fire only after `fail_threshold` consecutive bad probes. After editing by hand: `nxt-node bot restart`.
 </details>
 
 ---
 
-## 🧩 Panel Tools
+## 📦 Backup & move to a new VPS
 
-`nxt-node` → **16** (or `nxt-node panels`).
+The old server died? One file brings everything back.
 
-For each node the tool creates:
+**What is in a backup** (`.nxtbak`, JSON, checksum-protected): the node list **with ports**, monitor settings, and *how* nodes were wired into your panel
+(which inbound, which host, address mode). **No passwords or tokens** unless you ask for them (`--secrets`, terminal only).
 
-**Inbound** (clone of the source you pick, new port) → **SOCKS outbound** to `127.0.0.1:<node port>` → **routing rule** → **host**
+```bash
+# old server (or Telegram bot → 📦 Backup → 📤 Send)
+nxt-node backup                      # → /root/nexusnet-backups/nexusnet-<host>-<date>.nxtbak
+nxt-node backup --send               # also uploads it to your Telegram admins
+
+# NEW server
+bash <(curl -fsSL https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/Multi/install.sh)
+nxt-node restore nexusnet-....nxtbak
+```
+
+`restore` runs in this order and tells you what happened at each step:
+
+1. **Engine** – installs Tor + GeoIP if needed
+2. **Nodes** – recreated with the **same SOCKS/control ports** (existing nodes are kept)
+3. **Settings** – alert/monitor settings (bot token only if the file includes secrets and you allow it)
+4. **Panel wiring** – finds your inbound and host **by name** in the new panel and wires every node in one batch
+5. **Health check** – waits for the nodes to bootstrap and reports 🟢 / 🔴
+
+**Without a terminal:** set up the bot on the new server (`nxt-node bot setup`) and just **send the `.nxtbak` file to the bot** — it shows a plan and a *Restore now* button.
+Turn on **📅 Auto backup** in the bot and a fresh file lands in your chat every night — a copy always exists even if the VPS vanishes.
+
+> The panel itself (users, inbounds) must exist on the new server — restore the panel's own backup first. Panel passwords are not in the file:
+> if a panel says *login needed*, run `nxt-node panels` once. Old v2.x text backups (`nexusnet_backup.txt`) can be restored too.
+
+---
+
+## 🧩 Panels
+
+`nxt-node` → **20**, or `nxt-node panels`. For each node NexusNet creates in the panel:
+
+`inbound (cloned from one you choose, new port)` → `SOCKS outbound 127.0.0.1:<node port>` → `routing rule` → `host`
 
 | Panel | Method | Notes |
-|-------|--------|-------|
-| **3X-UI (Sanaei)** | Panel API + local DB | |
-| **Pasargad** | Panel API | Username / password asked once, stored `0600` |
-| **Marzban** | Panel API | **One Xray restart** for any number of nodes; tags `NexusNet-XX` |
+|---|---|---|
+| **3X-UI / Sanaei** | panel API + local DB | |
+| **Pasargad** | panel API | login asked once, stored `0600` |
+| **Marzban** | panel API | one Xray restart for any number of nodes; tags `NexusNet-XX` |
 
-<details>
-<summary><b>Marzban tips</b></summary>
+**Marzban:** use a *sudo* admin; Xray must reach `127.0.0.1:<node port>` (the official docker-compose uses `network_mode: host`, which works);
+create at least one host on the inbound you want to clone first; users with an explicit inbound list must be allowed the new `NexusNet-XX` inbounds.
 
-- Log in as a **sudo** admin  
-- Xray must reach `127.0.0.1:<node port>` (official compose with `network_mode: host` works)  
-- Create at least one host on the inbound you want to clone  
-- Users with an explicit inbound list need the new `NexusNet-XX` tags added  
-
-Safety rule: your non-NexusNet inbounds are **never** deleted or rewritten.  
-If a port is taken, that node is skipped (3X-UI / Pasargad) or moved to the next free port (Marzban).  
-Delete matches **exact tags only**.
-</details>
-
----
-
-## 📦 Typical workflow
-
-1. **Install engine** (menu `1`)  
-2. **Add nodes** — one location (`4`) or bulk (`5`)  
-3. **Panel Tools** (`16`) — clone inbound + host for each country  
-4. **Health bot** (`17`) — optional, for alerts and remote restart  
-5. **Latency / restart / backup** as needed (`9` · `10` · `15`)
-
-Edit / delete (`7`) supports single and multi select:
-
-```
-1          → one node
-1,3,5      → several
-1-10       → a range
-```
+**Safety rules (all panels):** foreign inbounds are **never** deleted or modified — if the preferred port is taken the node is skipped
+(3X-UI / Pasargad) or moved to the next free port (Marzban); deletion matches **exact tags only**.
 
 ---
 
 ## 🔒 Security
 
-| Topic | Behavior |
-|-------|----------|
-| SOCKS bind | Default **127.0.0.1** only. For a remote panel: `NXT_SOCKS_BIND=0.0.0.0` **and a firewall** |
-| Secrets | Bot token & panel passwords under `/etc/nexusnet/` (`0700` / `0600`) |
-| Bot access | Answers **admin IDs only** |
-| Panel deletes | Exact tag match — never mass-wipes your panel |
+* Tor SOCKS ports bind to **127.0.0.1** by default. A remote panel? `NXT_SOCKS_BIND=0.0.0.0` **and a firewall**. `nxt-node doctor` warns about exposed ports.
+* Bot token and panel passwords live in `/etc/nexusnet/` (dir `0700`, files `0600`). Never paste them in issues.
+* Backups sent through Telegram never contain tokens or passwords; the restore file is size-limited, checksum-verified and schema-validated before anything runs.
+* The bot only answers the configured admin IDs; strangers get a single “access denied”.
+* In the bot, delete and restart-all always ask for confirmation; `nxt-node delete` asks too unless you pass `-y`.
 
 ---
 
-## ❓ FAQ
+## 🛟 Troubleshooting
 
-<details>
-<summary><b>Upgrade from v2.x?</b></summary>
-Run the same install command. Existing nodes are left alone. Commands <code>nexusnet</code> / <code>panel-tools</code> keep working.
-</details>
-
-<details>
-<summary><b>Ping is high (200–250 ms)?</b></summary>
-That is mostly path + Tor circuit quality. Prefer a VPS in <b>DE</b> or <b>NL</b>. Restart nodes (menu <code>10</code> or <code>/restart_all</code>) to request new circuits.
-</details>
-
-<details>
-<summary><b>Host not created on Pasargad?</b></summary>
-Pasargad expects <code>address</code> / <code>host</code> as a <b>list</b> of strings. Recent NexusNet versions send the correct format. Update if you are on an older build.
-</details>
-
-<details>
-<summary><b>Bot menu appears by itself / buttons do nothing?</b></summary>
-Restart the service after setup: <code>sudo nxt-node bot restart</code>. Confirm your numeric Telegram ID is in the admin list. Open the bot once and press <b>Start</b>.
-</details>
-
-<details>
-<summary><b>Uninstall everything?</b></summary>
-Menu <code>3</code> — removes NexusNet services and packages. Panel configs created by Panel Tools can be cleaned from option <code>7</code> / Panel Tools when available.
-</details>
+| Symptom | Try |
+|---|---|
+| Nodes never get online | `nxt-node doctor` (clock sync, GeoIP, RAM) · `nxt-node logs de` |
+| Bot does not answer | `nxt-node bot logs` · `nxt-node doctor` (Telegram reachable?) · set a proxy in *Alert settings* |
+| Setup says “chat not found” | open the bot and press **Start**, then *Send test message* |
+| A panel is “login needed” in the bot | run `nxt-node panels` once in the server terminal |
 
 ---
 
-## 🙏 Credits
+## Source code
 
-Built on the original idea by **T.Sin**  
-Upgraded & maintained by **SiNa (KeEn)**  
+`install.sh` carries the whole program. To read or edit it: `bash install.sh --extract` → `NexusNet-Node-src/`, then `python3 tools/build_installer.py` to rebuild.
 
-Telegram: [NexusNet](https://t.me/NexusNet_Plus)
+## Credits
+
+Based on the T.Sin idea · Developed by **KeEn** · Telegram channel: **NexusNet**
 
 ## License
 
