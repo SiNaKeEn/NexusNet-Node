@@ -1,10 +1,10 @@
-[README.fa.md](https://github.com/user-attachments/files/33732623/README.fa.md)
-<div align="center" dir="rtl">
+[README.md](https://github.com/user-attachments/files/33732638/README.md)
+<div align="center">
 
 # NexusNet Node
 
-**یک سرور · چندین کشور خروجی.**
-مدیریت نودهای Tor چندلوکیشن برای **ثنایی (3X-UI) · پاسارگارد · مرزبان** — همراه با بات کنترل تلگرام.
+**One VPS · many exit countries.**
+Multi-location Tor exit-node manager for **3X-UI (Sanaei) · Pasargad · Marzban** — with a Telegram control bot.
 
 ![version](https://img.shields.io/badge/version-4.1.0-22d3ee?style=for-the-badge&labelColor=0b1220)
 ![python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&labelColor=0b1220)
@@ -13,76 +13,64 @@
 ![bot](https://img.shields.io/badge/Telegram-control%20bot-26A5E4?style=for-the-badge&labelColor=0b1220)
 ![license](https://img.shields.io/badge/license-MIT-16a34a?style=for-the-badge&labelColor=0b1220)
 
-[English](README.md) · **فارسی**
+**English** · [فارسی](README.fa.md)
 
 </div>
 
-<div dir="rtl">
-
 ---
 
-## ✨ این پروژه چیه؟
+## ✨ What is it?
 
-NexusNet یک VPS را به مجموعه‌ای از نودهای Tor تبدیل می‌کند که هرکدام روی **یک کشور مشخص** قفل شده‌اند (۵۱ لوکیشن).
-بعد همه را خودکار به پنل شما وصل می‌کند: اینباند ← اوت‌باند SOCKS ← قانون روتینگ ← هاست.
-کاربران از یک ساب‌اسکریپشن می‌توانند 🇩🇪 آلمان، 🇹🇷 ترکیه، 🇳🇱 هلند و … را انتخاب کنند.
+NexusNet turns **one VPS** into a fleet of Tor instances, each **pinned to a different exit country** (51 locations),
+then wires them into your proxy panel — inbound → SOCKS outbound → routing rule → host — so your users can pick
+🇩🇪 Germany, 🇹🇷 Turkey, 🇳🇱 Netherlands… from a single subscription.
 
-| قابلیت | توضیح |
+| | |
 |---|---|
-| 🌍 **۵۱ لوکیشن** | پورت SOCKS ثابت و قابل‌پیش‌بینی برای هر کشور |
-| 🔌 **سه پنل** | ثنایی · پاسارگارد · **مرزبان** — برای هر تعداد نود فقط یک ریستارت Xray |
-| 🤖 **بات کنترل تلگرام** | داشبورد، پینگ زنده، هشدار با **دکمه‌ی ریستارت**، افزودن/حذف نود و اتصال به پنل — همه از گوشی |
-| 📦 **بکاپ و انتقال به VPS جدید** | یک فایل ← سرور جدید: موتور، نودها با **همان پورت‌ها**، تنظیمات و اتصال پنل به ترتیب برمی‌گردند؛ بکاپ روزانه مستقیم به تلگرام شما |
-| ☑️ **کار گروهی از گوشی** | ۱۰ کشور را یک‌جا انتخاب کنید، بسازید و یک‌باره به پنل وصل کنید — حذف و ریستارت هم همین‌طور |
-| 🛠 **ریستارت خودکار** | نودی که خاموش بماند خودکار ریستارت می‌شود (با محدودیت تعداد) |
-| 🩺 **Doctor** | `nxt-node doctor` دلیل‌های رایج خرابی را پیدا می‌کند: ساعت اشتباه، نبود GeoIP، تداخل پورت، پروکسی باز، بلاک بودن تلگرام |
-| 🧹 **حذف ایمن** | هم سرویس را پاک می‌کند هم تنظیمات پنل را — فقط با تگ دقیق؛ اینباندهای شخصی شما دست‌نخورده می‌مانند |
-| 💾 **بکاپ** | لیست نودها و پورت‌ها در یک فایل |
+| 🌍 **51 locations** | fixed, predictable SOCKS port per country |
+| 🔌 **3 panels** | 3X-UI (Sanaei) · Pasargad · **Marzban** — one Xray restart however many nodes you add |
+| 🤖 **Telegram control bot** | dashboard, live ping, alerts with **one-tap restart**, add / delete nodes, wire to panels — all from your phone |
+| 📦 **Backup & VPS migration** | one file → new server: engine, nodes with the **same ports**, settings and panel wiring restored in order; daily backup straight to your Telegram |
+| ☑️ **Bulk from your phone** | select 10 countries at once, create them and wire them into the panel in one batch — same for delete / restart |
+| 🛠 **Auto-heal** | a node that stays down is restarted automatically (rate-limited) |
+| 🩺 **Doctor** | `nxt-node doctor` finds the usual causes: wrong clock, missing GeoIP, port clashes, exposed proxies, blocked Telegram |
+| 🧹 **Safe delete** | removes the service **and** its panel config — exact tags only, your own inbounds are never touched |
+| 💾 **Backup / restore** | node list + ports in one file |
 
 ---
 
-## 🚀 نصب
+## 🚀 Install
 
-> Linux با دسترسی **root**، اوبونتو یا دبیان. پنل بهتر است روی **همان سرور** باشد.
-
-</div>
+> Linux, **root**, Ubuntu / Debian. Your panel should be on the **same** server.
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/Multi/install.sh)
 ```
 
-<div dir="rtl">
-
-نصب‌کننده یک فایل مستقل است. دفعات بعد فقط بزنید:
-
-</div>
+The installer is a single self-contained file. Next time just run:
 
 ```bash
 sudo nxt-node
 ```
 
-<div dir="rtl">
-
-دستورهای `nexusnet`، `NexusNet` و `panel-tools` هم هنوز کار می‌کنند. آپدیت از نسخه‌های قبلی به نودهای شما دست نمی‌زند.
+`nexusnet`, `NexusNet` and `panel-tools` still work. Upgrading from an older version keeps your nodes untouched.
 
 <details>
-<summary><b>پیش‌نیازها</b></summary>
+<summary><b>Requirements</b></summary>
 
 | | |
 |---|---|
-| سیستم‌عامل | Ubuntu 20.04+ / Debian 11+ |
-| CPU / RAM | حداقل ۲ هسته · ۴ گیگ رم (هر نود یک پردازش Tor است، تقریباً ۶۰ مگابایت) |
-| پایتون | 3.8+ (خودکار نصب می‌شود) |
-| پنل | ثنایی، پاسارگارد یا مرزبان روی همان سرور |
+| OS | Ubuntu 20.04+ / Debian 11+ |
+| CPU / RAM | 2+ cores · 4 GB+ (each node is one Tor process, roughly 60 MB) |
+| Python | 3.8+ (installed automatically) |
+| Panel | 3X-UI, Pasargad or Marzban on the same machine |
 
-عدد پینگ یک درخواست کامل از داخل مدار Tor است (معمولاً ۰٫۳ تا ۲ ثانیه)، نه پینگ ICMP.
+The ping you see is a full request **through a Tor circuit** (typically 0.3 – 2 s), not an ICMP ping.
 </details>
 
 ---
 
-## 🖥 منوی ترمینال
-
-</div>
+## 🖥 Terminal menu
 
 ```
  ┌────────────────────────────────────────────────────────┐
@@ -125,78 +113,66 @@ sudo nxt-node
  └────────────────────────────────────────────────────────┘
 ```
 
-<div dir="rtl">
-
-### خط فرمان (برای اسکریپت‌نویسی)
-
-</div>
+### Command line (scriptable)
 
 ```bash
-nxt-node                      # منوی تعاملی
-nxt-node list [--json]        # نودها + وضعیت سرویس
-nxt-node add de nl tr         # ساخت نود   (یا: nxt-node add --all)
-nxt-node delete tr -y         # حذف نود و تنظیمات پنلش
-nxt-node restart all|de       # ریستارت
-nxt-node newnym de|all        # مدار/آی‌پی خروجی جدید
-nxt-node logs de -n 100       # لاگ سرویس یک نود
-nxt-node backup [-o FILE] [--secrets] [--send]   # فایل بکاپ (+ ارسال به تلگرام)
-nxt-node restore FILE [-y] [--no-wire]           # بازیابی / انتقال روی همین سرور
-nxt-node health [de] [--geo] [--json]   # بررسی از داخل Tor (اگر نودی خراب باشد exit code = 1)
-nxt-node doctor               # عیب‌یابی
+nxt-node                      # interactive menu
+nxt-node list [--json]        # installed nodes + service state
+nxt-node add de nl tr         # create nodes   (or: nxt-node add --all)
+nxt-node delete tr -y         # delete a node and its panel config
+nxt-node restart all|de       # restart
+nxt-node newnym de|all        # fresh Tor circuit / exit IP
+nxt-node logs de -n 100       # a node's service log
+nxt-node backup [-o FILE] [--secrets] [--send]   # backup file (+ send to Telegram)
+nxt-node restore FILE [-y] [--no-wire]           # restore / migrate on THIS server
+nxt-node health [de] [--geo] [--json]   # probe through Tor (exit code 1 if any node is bad)
+nxt-node doctor               # diagnose problems
 nxt-node bot setup|start|stop|restart|status|logs|test
 nxt-node panels               # Panel Tools
 nxt-node update
 ```
 
-<div dir="rtl">
-
 ---
 
-## 🤖 بات تلگرام
+## 🤖 Telegram bot
 
-مثل بات پنل‌های ثنایی و پاسارگارد: **توکن + آیدی ادمین و تمام.**
+Connect it exactly like the bots of Sanaei / Pasargad: **token + admin ID, done.**
 
-۱. در [@BotFather](https://t.me/BotFather) یک بات بسازید و **توکن** را بردارید.
-۲. وارد بات خودتان شوید و **Start** بزنید. آیدی عددی خودتان را از [@userinfobot](https://t.me/userinfobot) بگیرید.
-۳. `nxt-node` ← **۱۰** ← **۱** ← توکن و آیدی را وارد کنید (زبان: Farsi / English). پیام تست فرستاده می‌شود و سرویس فعال می‌شود.
+1. Create a bot with [@BotFather](https://t.me/BotFather) → copy the **token**.
+2. Open your bot and press **Start**. Get your numeric ID from [@userinfobot](https://t.me/userinfobot).
+3. `nxt-node` → **10** → **1** → paste both (language: Farsi / English). A test message is sent and the service is enabled.
 
-اگر تلگرام روی سرور شما بلاک است، هنگام راه‌اندازی یک پروکسی اختیاری می‌پرسد (فقط برای `api.telegram.org` استفاده می‌شود).
+If Telegram is blocked on your server the setup asks for an optional proxy (used **only** for `api.telegram.org`).
 
-### بات چه کارهایی می‌کند
-
-</div>
+### What you get
 
 ```
 🌐 NexusNet Node · v4.1.0
 ━━━━━━━━━━━━━━━━━━━━
-🟢 ۱۱ آنلاین · 🟡 ۱ کند · 🔴 ۱ قطع
-⚡ میانگین پینگ ۶۴۰ ms · 🕒 ۴۲s پیش بررسی شد
+🟢 11 online · 🟡 1 slow · 🔴 1 down
+⚡ Avg ping 640 ms · 🕒 checked 42s ago
 ━━━━━━━━━━━━━━━━━━━━
-🖥 Load 0.42 · RAM 41% · آپتایم 12d
+🖥 Load 0.42 · RAM 41% · Up 12d
 
- [📊 وضعیت]  [🚨 مشکل‌ها]  [🏓 پینگ همه]
- [🌍 نودها]  [➕ افزودن نود] [🧩 پنل‌ها]
- [🖥 سیستم]  [⚙️ تنظیمات]  [❓ راهنما]
+ [📊 Status] [🚨 Problems] [🏓 Ping all]
+ [🌍 Nodes]  [➕ Add node] [🧩 Panels]
+ [🖥 System] [⚙️ Settings] [❓ Help]
 ```
 
-<div dir="rtl">
+* **One message, always** – every button *edits* the same message; no chat spam. `/start` replaces the old menu.
+* **Alerts with buttons** – a down-alert carries `🔄 DE  🔄 TR …` buttons: restart the broken node straight from the alert.
+* **Nodes** – grid with live status icons → tap a node for details, 🏓 ping, 🔄 restart, 🔁 new circuit, 🔗 wire to panel, 🗑 delete (with confirmation).
+* **Select several** – `☑️ Select` on the Nodes screen (or ➕ Add): tick any number of countries/nodes (page, all, clear), then **Create / Restart / Wire to panel / Delete** them in one go. Panels get one batch (Marzban: a single Xray restart).
+* **Add nodes** – pick e.g. 10 countries → *Tor only* or *Tor + panel* (inbound → host → address wizard) with live progress.
+* **Backup** – 📤 send a backup file now, 📅 daily auto-backup to your chat, and **send a `.nxtbak` file to the bot to restore** (see below).
+* **Panels** – wire existing nodes into 3X-UI / Pasargad / Marzban. **Panel passwords are never typed into Telegram** — save the login once with `nxt-node panels`.
+* **Settings** – auto-heal, slow alerts, exit-country check, daily report, interval, alert threshold, mute 1h / 8h, language فارسی ⇄ English.
+* Grouped alerts (one message, not 40), recovery messages with downtime, “still down” reminders, and a hint when the **VPS itself** has no internet.
 
-* **همیشه یک پیام** – هر دکمه همان پیام را *ویرایش* می‌کند؛ چت شلوغ نمی‌شود. `/start` منوی قدیمی را جایگزین می‌کند.
-* **هشدار همراه دکمه** – هشدار قطعی دکمه‌هایی مثل `🔄 DE  🔄 TR` دارد؛ نود خراب را مستقیم از همان هشدار ریستارت کنید.
-* **نودها** – شبکه‌ی نودها با آیکن وضعیت زنده ← روی نود بزنید: جزئیات، 🏓 پینگ، 🔄 ریستارت، 🔁 مدار جدید، 🔗 اتصال به پنل، 🗑 حذف (با تأیید).
-* **انتخاب چندتایی** – دکمه‌ی `☑️ انتخاب چندتایی` (در صفحه‌ی نودها یا ➕ افزودن): هر تعداد کشور/نود را تیک بزنید (صفحه، همه، پاک‌کردن)، بعد یک‌جا **بسازید / ریستارت / وصل به پنل / حذف** کنید. پنل یک بچ دریافت می‌کند (مرزبان: فقط یک ریستارت Xray).
-* **افزودن نود** – مثلاً ۱۰ کشور را انتخاب کنید ← *فقط Tor* یا *Tor + پنل* (ویزارد اینباند ← هاست ← آدرس) با نوار پیشرفت زنده.
-* **بکاپ** – 📤 ارسال بکاپ، 📅 بکاپ روزانه‌ی خودکار به چت شما، و **فایل `.nxtbak` را برای بات بفرستید تا بازیابی شود** (پایین‌تر).
-* **پنل‌ها** – نودهای موجود را به ثنایی / پاسارگارد / مرزبان وصل کنید. **رمز پنل هرگز داخل تلگرام وارد نمی‌شود** — ورود را یک‌بار با `nxt-node panels` ذخیره کنید.
-* **تنظیمات** – ریستارت خودکار، هشدار کندی، چک کشور خروجی، گزارش روزانه، بازه‌ی چک، آستانه‌ی هشدار، سکوت ۱ یا ۸ ساعته، زبان فارسی ⇄ English.
-* هشدار **گروهی** (یک پیام، نه ۴۰ پیام)، پیام بازگشت با مدت قطعی، یادآوری نودهای هنوز-خاموش، و اعلام اینکه **خودِ سرور** اینترنت ندارد.
-
-میانبرها: `/start /status /down /ping [cc] /nodes /node cc /restart cc /newnym cc|all /add [cc] /panels /backup /system /settings /mute 60 /unmute /interval 120 /help`
+Text shortcuts: `/start /status /down /ping [cc] /nodes /node cc /restart cc /newnym cc|all /add [cc] /panels /backup /system /settings /mute 60 /unmute /interval 120 /help`
 
 <details>
-<summary><b>تنظیمات پیشرفته</b> — <code>/etc/nexusnet/config.json</code></summary>
-
-</div>
+<summary><b>Advanced settings</b> — <code>/etc/nexusnet/config.json</code></summary>
 
 ```json
 {
@@ -210,102 +186,94 @@ nxt-node update
 }
 ```
 
-<div dir="rtl">
-
-**وضعیت نود:** 🟢 سالم · 🟡 کند (بیشتر از `slow_ms`) · 🟠 خطا (سرویس و پورت سالم‌اند ولی از Tor جوابی نمی‌آید، یا کشور خروجی اشتباه است) · 🔴 قطع (سرویس غیرفعال یا پورت بسته).
-هشدار فقط بعد از `fail_threshold` چک ناموفق پشت‌سرهم ارسال می‌شود. بعد از ویرایش دستی فایل: `nxt-node bot restart`.
+**Node status:** 🟢 UP · 🟡 SLOW (> `slow_ms`) · 🟠 ERROR (service and port fine, but nothing comes back through Tor, or wrong exit country) · 🔴 DOWN (unit inactive / port closed).
+Alerts fire only after `fail_threshold` consecutive bad probes. After editing by hand: `nxt-node bot restart`.
 </details>
 
 ---
 
-## 📦 بکاپ و انتقال به VPS جدید
+## 📦 Backup & move to a new VPS
 
-سرور قبلی خراب شد؟ با یک فایل همه‌چیز برمی‌گردد.
+The old server died? One file brings everything back.
 
-**داخل بکاپ چیست** (`.nxtbak`، JSON، با چک‌سام): لیست نودها **همراه پورت‌ها**، تنظیمات مانیتور، و اینکه نودها *چطور* به پنل وصل بودند
-(کدام اینباند، کدام هاست، حالت آدرس). **بدون رمز و توکن** مگر خودتان بخواهید (`--secrets`، فقط در ترمینال).
-
-</div>
+**What is in a backup** (`.nxtbak`, JSON, checksum-protected): the node list **with ports**, monitor settings, and *how* nodes were wired into your panel
+(which inbound, which host, address mode). **No passwords or tokens** unless you ask for them (`--secrets`, terminal only).
 
 ```bash
-# سرور قدیمی (یا بات تلگرام ← 📦 بکاپ ← 📤 ارسال)
-nxt-node backup                      # ← /root/nexusnet-backups/nexusnet-<host>-<date>.nxtbak
-nxt-node backup --send               # همزمان برای ادمین‌های تلگرام هم می‌فرستد
+# old server (or Telegram bot → 📦 Backup → 📤 Send)
+nxt-node backup                      # → /root/nexusnet-backups/nexusnet-<host>-<date>.nxtbak
+nxt-node backup --send               # also uploads it to your Telegram admins
 
-# سرور «جدید»
+# NEW server
 bash <(curl -fsSL https://raw.githubusercontent.com/SiNaKeEn/NexusNet-Node/Multi/install.sh)
 nxt-node restore nexusnet-....nxtbak
 ```
 
-<div dir="rtl">
+`restore` runs in this order and tells you what happened at each step:
 
-`restore` به این ترتیب کار می‌کند و هر مرحله را گزارش می‌دهد:
+1. **Engine** – installs Tor + GeoIP if needed
+2. **Nodes** – recreated with the **same SOCKS/control ports** (existing nodes are kept)
+3. **Settings** – alert/monitor settings (bot token only if the file includes secrets and you allow it)
+4. **Panel wiring** – finds your inbound and host **by name** in the new panel and wires every node in one batch
+5. **Health check** – waits for the nodes to bootstrap and reports 🟢 / 🔴
 
-1. **موتور** – Tor و GeoIP نصب می‌شود (اگر لازم باشد)
-2. **نودها** – با **همان پورت‌های SOCKS/Control** ساخته می‌شوند (نودهای موجود دست‌نخورده می‌مانند)
-3. **تنظیمات** – تنظیمات هشدار/مانیتور (توکن بات فقط اگر فایل شامل secrets باشد و شما اجازه بدهید)
-4. **اتصال به پنل** – اینباند و هاست شما **با نام** در پنل جدید پیدا می‌شود و همه‌ی نودها یک‌جا وصل می‌شوند
-5. **بررسی سلامت** – منتظر bootstrap نودها می‌ماند و 🟢 / 🔴 گزارش می‌دهد
+**Without a terminal:** set up the bot on the new server (`nxt-node bot setup`) and just **send the `.nxtbak` file to the bot** — it shows a plan and a *Restore now* button.
+Turn on **📅 Auto backup** in the bot and a fresh file lands in your chat every night — a copy always exists even if the VPS vanishes.
 
-**بدون ترمینال:** روی سرور جدید بات را راه‌اندازی کنید (`nxt-node bot setup`) و فقط **فایل `.nxtbak` را برای بات بفرستید** — برنامه را نشان می‌دهد و دکمه‌ی *بازیابی کن* دارد.
-**📅 بکاپ خودکار** را در بات روشن کنید تا هر شب یک فایل تازه داخل چت شما بنشیند — حتی اگر VPS ناگهان نابود شود، نسخه‌ای دارید.
-
-> خود پنل (کاربران، اینباندها) باید روی سرور جدید وجود داشته باشد — اول بکاپ خود پنل را برگردانید. رمز پنل داخل فایل نیست:
-> اگر پنلی «نیاز به ورود» گفت یک‌بار `nxt-node panels` را بزنید. بکاپ‌های متنی قدیمی نسخه‌ی ۲ (`nexusnet_backup.txt`) هم قابل بازیابی‌اند.
+> The panel itself (users, inbounds) must exist on the new server — restore the panel's own backup first. Panel passwords are not in the file:
+> if a panel says *login needed*, run `nxt-node panels` once. Old v2.x text backups (`nexusnet_backup.txt`) can be restored too.
 
 ---
 
-## 🧩 پنل‌ها
+## 🧩 Panels
 
-`nxt-node` ← **۲۰** (یا `nxt-node panels`). برای هر نود در پنل ساخته می‌شود:
+`nxt-node` → **20**, or `nxt-node panels`. For each node NexusNet creates in the panel:
 
-`اینباند (کلون از اینباندی که انتخاب می‌کنید، با پورت جدید)` ← `اوت‌باند SOCKS به 127.0.0.1:<پورت نود>` ← `قانون روتینگ` ← `هاست`
+`inbound (cloned from one you choose, new port)` → `SOCKS outbound 127.0.0.1:<node port>` → `routing rule` → `host`
 
-| پنل | روش | نکته |
+| Panel | Method | Notes |
 |---|---|---|
-| **ثنایی (3X-UI)** | API پنل + دیتابیس محلی | |
-| **پاسارگارد** | API پنل | ورود یک‌بار پرسیده و با دسترسی `0600` ذخیره می‌شود |
-| **مرزبان** | API پنل | برای هر تعداد نود یک ریستارت Xray؛ تگ‌ها `NexusNet-XX` |
+| **3X-UI / Sanaei** | panel API + local DB | |
+| **Pasargad** | panel API | login asked once, stored `0600` |
+| **Marzban** | panel API | one Xray restart for any number of nodes; tags `NexusNet-XX` |
 
-**مرزبان:** با ادمین *sudo* وارد شوید؛ Xray باید به `127.0.0.1:<پورت نود>` برسد (docker-compose رسمی با `network_mode: host` کار می‌کند)؛
-قبلش حداقل یک هاست روی اینباندی که می‌خواهید کلون شود بسازید؛ کاربرانی که لیست اینباند مشخص دارند باید اینباندهای `NexusNet-XX` را هم داشته باشند.
+**Marzban:** use a *sudo* admin; Xray must reach `127.0.0.1:<node port>` (the official docker-compose uses `network_mode: host`, which works);
+create at least one host on the inbound you want to clone first; users with an explicit inbound list must be allowed the new `NexusNet-XX` inbounds.
 
-**قاعده‌ی ایمنی (همه‌ی پنل‌ها):** اینباندهای شخصی شما **هرگز** حذف یا تغییر نمی‌کنند — اگر پورت اشغال باشد آن نود رد می‌شود
-(ثنایی / پاسارگارد) یا به پورت آزاد بعدی می‌رود (مرزبان)؛ حذف فقط با تطبیق **دقیق تگ** انجام می‌شود.
-
----
-
-## 🔒 امنیت
-
-* پورت‌های SOCKS تور به‌صورت پیش‌فرض فقط روی **127.0.0.1** گوش می‌دهند. پنل روی سرور دیگری است؟ `NXT_SOCKS_BIND=0.0.0.0` **و حتماً فایروال**. `nxt-node doctor` درباره‌ی پورت‌های باز هشدار می‌دهد.
-* توکن بات و پسورد پنل‌ها در `/etc/nexusnet/` ذخیره می‌شود (پوشه `0700`، فایل‌ها `0600`). هرگز آن‌ها را داخل ایشو نگذارید.
-* بکاپ‌هایی که از تلگرام می‌روند هرگز توکن یا رمز ندارند؛ فایل بازیابی قبل از هر کاری از نظر حجم، چک‌سام و ساختار اعتبارسنجی می‌شود.
-* بات فقط به آیدی‌های ادمین جواب می‌دهد؛ بقیه فقط یک بار «دسترسی ندارید» می‌گیرند.
-* در بات، حذف نود و ریستارت همه همیشه تأیید می‌گیرند؛ `nxt-node delete` هم تأیید می‌گیرد مگر `-y` بدهید.
+**Safety rules (all panels):** foreign inbounds are **never** deleted or modified — if the preferred port is taken the node is skipped
+(3X-UI / Pasargad) or moved to the next free port (Marzban); deletion matches **exact tags only**.
 
 ---
 
-## 🛟 عیب‌یابی
+## 🔒 Security
 
-| مشکل | راه‌حل |
+* Tor SOCKS ports bind to **127.0.0.1** by default. A remote panel? `NXT_SOCKS_BIND=0.0.0.0` **and a firewall**. `nxt-node doctor` warns about exposed ports.
+* Bot token and panel passwords live in `/etc/nexusnet/` (dir `0700`, files `0600`). Never paste them in issues.
+* Backups sent through Telegram never contain tokens or passwords; the restore file is size-limited, checksum-verified and schema-validated before anything runs.
+* The bot only answers the configured admin IDs; strangers get a single “access denied”.
+* In the bot, delete and restart-all always ask for confirmation; `nxt-node delete` asks too unless you pass `-y`.
+
+---
+
+## 🛟 Troubleshooting
+
+| Symptom | Try |
 |---|---|
-| نودها هیچ‌وقت آنلاین نمی‌شوند | `nxt-node doctor` (ساعت سیستم، GeoIP، رم) · `nxt-node logs de` |
-| بات جواب نمی‌دهد | `nxt-node bot logs` · `nxt-node doctor` (تلگرام در دسترس است؟) · در *Alert settings* پروکسی بگذارید |
-| هنگام راه‌اندازی «chat not found» می‌دهد | وارد بات شوید و **Start** بزنید، بعد *Send test message* |
-| پنلی در بات «نیاز به ورود» دارد | یک‌بار در ترمینال سرور `nxt-node panels` را بزنید |
+| Nodes never get online | `nxt-node doctor` (clock sync, GeoIP, RAM) · `nxt-node logs de` |
+| Bot does not answer | `nxt-node bot logs` · `nxt-node doctor` (Telegram reachable?) · set a proxy in *Alert settings* |
+| Setup says “chat not found” | open the bot and press **Start**, then *Send test message* |
+| A panel is “login needed” in the bot | run `nxt-node panels` once in the server terminal |
 
 ---
 
-## سورس کد
+## Source code
 
-`install.sh` کل برنامه را در خودش دارد. برای خواندن یا ویرایش: `bash install.sh --extract` ← پوشه‌ی `NexusNet-Node-src/` و بعد `python3 tools/build_installer.py` برای ساخت دوباره.
+`install.sh` carries the whole program. To read or edit it: `bash install.sh --extract` → `NexusNet-Node-src/`, then `python3 tools/build_installer.py` to rebuild.
 
-## کردیت
+## Credits
 
-بر پایه‌ی ایده‌ی T.Sin · توسعه: **KeEn** · کانال تلگرام: **NexusNet**
+Based on the T.Sin idea · Developed by **KeEn** · Telegram channel: **NexusNet**
 
-## لایسنس
+## License
 
 [MIT](LICENSE)
-
-</div>
