@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/33737656/README.md)
+[README.md](https://github.com/user-attachments/files/33738436/README.md)
 <div align="center">
 
 # NexusNet Node
@@ -6,7 +6,7 @@
 **One VPS · many exit countries.**
 Multi-location Tor exit-node manager for **3X-UI (Sanaei) · Pasargad · Marzban** — with a Telegram control bot.
 
-![version](https://img.shields.io/badge/version-4.1.0-22d3ee?style=for-the-badge&labelColor=0b1220)
+![version](https://img.shields.io/badge/version-4.5.0-22d3ee?style=for-the-badge&labelColor=0b1220)
 ![python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&labelColor=0b1220)
 ![os](https://img.shields.io/badge/Ubuntu%20%C2%B7%20Debian-E95420?style=for-the-badge&labelColor=0b1220)
 ![panels](https://img.shields.io/badge/3x--ui%20%C2%B7%20Pasargad%20%C2%B7%20Marzban-supported-2563eb?style=for-the-badge&labelColor=0b1220)
@@ -75,7 +75,7 @@ The ping you see is a full request **through a Tor circuit** (typically 0.3 – 
 ```
  ┌────────────────────────────────────────────────────────┐
  │             N E X U S N E T  -  Multi Node             │
- │       v4.1.0  ·  Tor exit nodes for your panels        │
+ │       v4.5.0  ·  Tor exit nodes for your panels        │
  └────────────────────────────────────────────────────────┘
  ┌────────────────────────────────────────────────────────┐
  │  System    : Active (12 nodes)                         │
@@ -106,6 +106,7 @@ The ping you see is a full request **through a Tor circuit** (typically 0.3 – 
  │   [19] » Backup & Migrate  (move to a new VPS)         │
  ├─ PANELS ───────────────────────────────────────────────┤
  │   [20] » Panel Tools  (3X-UI / Pasargad / Marzban)     │
+ │   [22] » Remote VPS  (Tor on Pasargad nodes, SSH)      │
  ├─ DANGER ZONE ──────────────────────────────────────────┤
  │   [21] » Delete All Nodes                              │
  ├────────────────────────────────────────────────────────┤
@@ -147,7 +148,7 @@ If Telegram is blocked on your server the setup asks for an optional proxy (used
 ### What you get
 
 ```
-🌐 NexusNet Node · v4.1.0
+🌐 NexusNet Node · v4.5.0
 ━━━━━━━━━━━━━━━━━━━━
 🟢 11 online · 🟡 1 slow · 🔴 1 down
 ⚡ Avg ping 640 ms · 🕒 checked 42s ago
@@ -242,6 +243,30 @@ create at least one host on the inbound you want to clone first; users with an e
 
 **Safety rules (all panels):** foreign inbounds are **never** deleted or modified — if the preferred port is taken the node is skipped
 (3X-UI / Pasargad) or moved to the next free port (Marzban); deletion matches **exact tags only**.
+
+---
+
+## 🖥 Remote VPS — Tor on your Pasargad nodes
+
+Pasargad worker nodes are usually bare servers. NexusNet installs Tor **on the node itself** over SSH, so the core's
+Xray reaches it on `127.0.0.1` (no open ports, nothing exposed). `nxt-node` → **22**.
+
+**Terminal** — pick a server and you see *its* nodes exactly like the master list: country, SOCKS port, service state;
+**Live check** adds ping and the **exit IP** of every node.
+
+| Key | Action |
+|---|---|
+| `1` | **Add countries** — `de tr nl`, `top` (12 most used) or `all`. Installs NexusNet + Tor if missing, creates the nodes, wires them into the node's core (one panel save, host address = the node's address) |
+| `2` | **Delete nodes** — removes them on the VPS **and** their inbound/outbound/rule/host in the panel core |
+| `3` / `5` | Restart / new circuits (selected or all) |
+| `4` | Live check (ping + exit IP) |
+| `6` | Change SSH password / remove the VPS from the list |
+
+Adding a VPS: if Pasargad is connected you pick one of **its nodes** and only type the SSH password — the core is remembered.
+Re-runs are fast: the installer is skipped when NexusNet is already there, and the last inbound/host template is reused.
+
+**Telegram bot** — 🖥 *Remote VPS*: server list with `🟢 up/total`, tap a server → node list (service state), **📡 Live check** (ping + exit IPs),
+**➕ Add countries / 🗑 Delete / 🔄 Restart** with a checkbox grid (delete always asks). SSH passwords are never typed in Telegram — add the VPS once in the terminal.
 
 ---
 
