@@ -1,5 +1,14 @@
-[README.md](https://github.com/user-attachments/files/33746386/README.md)
+[Uploading README.md…]()
 <div align="center">
+
+```
+███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗███╗   ██╗███████╗████████╗
+████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝████╗  ██║██╔════╝╚══██╔══╝
+██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗██╔██╗ ██║█████╗     ██║
+██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║██║╚██╗██║██╔══╝     ██║
+██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║██║ ╚████║███████╗   ██║
+╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝   ╚═╝
+```
 
 # NexusNet Node
 
@@ -262,8 +271,8 @@ Xray reaches it on `127.0.0.1` (no open ports, nothing exposed). `nxt-node` → 
 | **5** Edit / Delete | deletes nodes on the VPS **and** their inbound/outbound/rule/host in the panel core |
 | **7** Doctor · **12** Ports · **13** System | the same diagnostics as the main menu, run on that VPS |
 | **8–11** | restart all / one, new circuits, node logs |
-| **14** Wire to Panel | re-wire nodes that are already installed |
-| **15–17 · 18** | edit VPS, test SSH, remove from list · delete all nodes |
+| **14** Select Core · **15** Wire to Panel | a VPS can be several panel nodes with different cores: **all** of them are listed (the VPS's own first, then every other core) and you choose; **15** re-wires nodes that are already installed |
+| **16–18 · 19** | edit VPS, test SSH, remove from list · delete all nodes |
 
 The first screen lists your saved VPS (`1/12 up`) with **Add / Edit / Delete / Test SSH**; a number opens a menu laid out exactly like the main one.
 
