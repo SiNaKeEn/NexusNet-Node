@@ -1,5 +1,5 @@
-[Uploading README.md…]()
-<div align="center">
+[README.md](https://github.com/user-attachments/files/33799469/README.md)
+<div align="center"
 
 # NexusNet Node
 
@@ -272,6 +272,22 @@ Re-runs are fast: the installer is skipped when NexusNet is already there, and t
 
 **Telegram bot** — 🖥 *Remote VPS*: server list with `🟢 up/total`, tap a server → node list (service state), **📡 Live check** (ping + exit IPs),
 **➕ Add countries / 🗑 Delete / 🔄 Restart** with a checkbox grid (delete always asks). SSH passwords are never typed in Telegram — add the VPS once in the terminal.
+
+---
+
+## 🌐 Fleet — the master and every VPS as one system (v5)
+
+`nxt-node` → **21** → **F** (or the bot: 🖥 Remote VPS → 🌐 Fleet).
+
+* **Fleet Dashboard** — master + all VPS on one screen: nodes up/total, average ping, problems. **Live Check** probes through Tor and finds what a plain
+  "service is active" misses: **wrong exit country** and **duplicate exit IPs** (two nodes sharing one IP).
+* **Smart Heal** — per VPS (menu item) or **Heal All**: restarts nodes that are down, asks Tor for a **new circuit** where the exit is wrong or duplicated.
+  Nothing is touched when nothing is wrong.
+* **Update All / Restart All VPS** — the same action on every VPS in parallel (asks first).
+* **Automatic watch** — the Telegram bot reads every VPS every 5 minutes (one SSH call each) and alerts you:
+  VPS unreachable · nodes down · healed · healthy again. Down nodes are restarted automatically (max 3×/hour per VPS).
+  Settings in `/etc/nexusnet/config.json` → `"remote": {"watch", "interval_sec", "fail_threshold", "auto_heal", "heal_max_per_hour"}`.
+* **For cron / scripts** — `nxt-node fleet [--live] [--heal] [--json]` (exit code 1 when something is wrong).
 
 ---
 
