@@ -1,7 +1,7 @@
 [README.md](https://github.com/user-attachments/files/33799469/README.md)
 <div align="center"
 
-# NexusNet Node
+#  NexusNet Node
 
 **One VPS · many exit countries.**
 Multi-location Tor exit-node manager for **3X-UI (Sanaei) · Pasargad · Marzban** — with a Telegram control bot.
