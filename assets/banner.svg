@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="NexusNet Node">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070d1a"/>
+      <stop offset="0.55" stop-color="#0c1a36"/>
+      <stop offset="1" stop-color="#0a2a3d"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="0.5" stop-color="#60a5fa"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+
+  <rect width="1280" height="320" rx="22" fill="url(#bg)"/>
+  <rect x="1" y="1" width="1278" height="318" rx="21" fill="none" stroke="#1e3a5f" stroke-width="2"/>
+
+  <!-- network of exit nodes -->
+  <g stroke="#38bdf8" stroke-opacity="0.28" stroke-width="1.5" fill="none">
+    <path d="M70 70 L190 140 L120 250"/><path d="M190 140 L310 90"/><path d="M190 140 L300 230"/>
+    <path d="M1210 60 L1100 130 L1180 240"/><path d="M1100 130 L990 80"/><path d="M1100 130 L1000 235"/>
+  </g>
+  <g>
+    <circle cx="190" cy="140" r="46" fill="url(#glow)"/><circle cx="1100" cy="130" r="46" fill="url(#glow)"/>
+    <g fill="#67e8f9">
+      <circle cx="70" cy="70" r="6"/><circle cx="190" cy="140" r="9"/><circle cx="120" cy="250" r="6"/>
+      <circle cx="310" cy="90" r="5"/><circle cx="300" cy="230" r="5"/>
+      <circle cx="1210" cy="60" r="6"/><circle cx="1100" cy="130" r="9"/><circle cx="1180" cy="240" r="6"/>
+      <circle cx="990" cy="80" r="5"/><circle cx="1000" cy="235" r="5"/>
+    </g>
+  </g>
+
+  <!-- title -->
+  <g text-anchor="middle" font-family="'Segoe UI','Helvetica Neue',Helvetica,Arial,sans-serif">
+    <text x="640" y="168" font-size="104" font-weight="800" letter-spacing="14" fill="#22d3ee" opacity="0.35" filter="url(#soft)">NEXUSNET</text>
+    <text x="640" y="168" font-size="104" font-weight="800" letter-spacing="14" fill="url(#title)">NEXUSNET</text>
+    <text x="640" y="218" font-size="26" font-weight="500" letter-spacing="5" fill="#94a3b8">M U L T I   N O D E   ·   T O R   E X I T   N O D E S</text>
+    <g>
+      <rect x="486" y="244" width="308" height="38" rx="19" fill="#0f2742" stroke="#2563eb" stroke-opacity="0.7"/>
+      <text x="640" y="270" font-size="19" font-weight="600" fill="#bae6fd" letter-spacing="1.5">3X-UI  ·  Pasargad  ·  Marzban</text>
+    </g>
+  </g>
+</svg>
